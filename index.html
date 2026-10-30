@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Flappy 2048</title>
+<meta name="description" content="Play Flappy 2048 in your browser — flap a 2048 tile through the walls, merge up with every few gaps you pass, and reach 2048. Responsive, with keyboard and touch support.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <div class="side-panel">
+    <header class="heading">
+      <div class="title-block">
+        <h1 class="title">2048</h1>
+        <span class="title-sub">Flappy</span>
+      </div>
+      <div class="scores-container">
+        <div class="score-box">
+          <span class="score-label">Passed</span>
+          <span class="score-value" id="score">0</span>
+        </div>
+        <div class="score-box">
+          <span class="score-label">Best</span>
+          <span class="score-value" id="best">0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="above-game">
+      <p class="game-intro">Tap, click, or press <strong>Space</strong> to flap through the gaps. Merge up to <strong>2048</strong>!</p>
+      <div class="game-actions">
+        <button class="btn-new-game" id="new-game-btn" type="button">New Game</button>
+        <button class="btn-theme-toggle" id="theme-toggle-btn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="2" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <button class="btn-info" id="info-btn" type="button" aria-label="How to play" title="How to play">i</button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p class="attribution">
+        Inspired by
+        <a href="https://github.com/gabrielecirulli/2048" target="_blank" rel="noopener noreferrer">2048 by Gabriele Cirulli</a>
+      </p>
+    </footer>
+  </div>
+
+  <main class="board-wrap">
+    <div class="board" id="board">
+      <div class="grid-bg" id="grid-bg" aria-hidden="true"></div>
+      <div class="tile-layer" id="tile-layer"></div>
+      <div class="hint" id="hint" aria-live="polite">Tap or press Space to flap</div>
+      <div class="overlay" id="overlay" hidden>
+        <div class="overlay-box">
+          <p class="overlay-title" id="overlay-title">You Win!</p>
+          <p class="overlay-sub" id="overlay-sub"></p>
+          <div class="overlay-actions">
+            <button class="btn-overlay btn-secondary" id="overlay-continue-btn" type="button">Keep Flying</button>
+            <button class="btn-overlay btn-primary" id="overlay-retry-btn" type="button">New Game</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<div class="info-modal" id="info-modal" hidden>
+  <div class="info-modal-box">
+    <div class="info-modal-header">
+      <h2>How to Play</h2>
+      <button class="btn-close-modal" id="info-close-btn" type="button" aria-label="Close">✕</button>
+    </div>
+    <div class="info-modal-content">
+      <p class="info-howto">You are a 2048 tile in flight. Squeeze through the gaps in the green wall tiles — every wall you pass scores <strong>1</strong>. Pass <strong>5</strong> walls and your tile merges up to the next number (2 → 4 → 8 …). Reach <strong>2048</strong> to win, then keep flying for an even higher score. Touch a wall and it's game over, and the walls get faster the longer you survive.</p>
+
+      <h3>Controls</h3>
+      <p class="info-howto">Tap anywhere, click, or press <strong>Space</strong>, <strong>↑</strong>, or <strong>W</strong> to flap. Let go and you fall. <strong>New Game</strong> starts over, and your <strong>Best</strong> score is saved automatically.</p>
+
+      <h3>Tips</h3>
+      <p class="info-howto">Flaps are short hops, so tap in a steady rhythm instead of mashing, and aim for the middle of each gap. The floor and ceiling are safe — if the next gap is low, you can simply rest on the floor. The game pauses while this window is open or the page is hidden.</p>
+
+      <hr>
+      <p class="info-credits">
+        Inspired by
+        <a href="https://github.com/gabrielecirulli/2048" target="_blank" rel="noopener noreferrer">2048 by Gabriele Cirulli</a>.
+        The idea of a flapping 2048 tile is inspired by
+        <a href="https://hczhcz.github.io/Flappy-2048/" target="_blank" rel="noopener noreferrer">Flappy 2048 by hcz</a>,
+        which itself builds on Flappy Bird by Dong Nguyen. This fan project is not affiliated with either.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
